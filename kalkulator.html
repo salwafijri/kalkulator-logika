@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalkulator Logika Matematika</title>
+    <style>
+        body {
+            font-family: verdana, geneva, tahoma;
+            margin: 0;
+            padding: 30px;
+            color: #0a0334;
+            text-align: center;
+            background: linear-gradient(135deg, #050749, #696973);
+            overflow: hidden;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #c2c3d3, #0b0b37);
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(2, 1, 21, 0.91);
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+
+        select {
+            width: 80%;
+            padding: 8px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            background-color: rgb(8, 2, 44);
+            color:rgb(243, 242, 245)
+        }   
+
+        button {
+            width: 60%;
+            padding: 10px;
+            background-color: #5858a4;
+            color: rgb(1, 0, 3);
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #f1f0f6;
+        }
+
+        h2 {
+            width: 70%;
+            padding: 15px;
+            background-color: #81819c;
+            color: rgb(21, 4, 55);
+            border: none;
+            border-radius: 8px;
+            margin: 10px 50px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Kalkulator Logika Matematika</h1>
+        <div>
+            <label for="operand1">Operand 1:</label>
+            <select id="operand1">
+                <option value="true">True</option>
+                <option value="false">False</option>
+            </select>
+        </div>
+        <div>
+            <label for="operand2">Operand 2:</label>
+            <select id="operand2">
+                <option value="true">True</option>
+                <option value="false">False</option>
+            </select>
+        </div>
+        <div>
+            <label for="operation">Operasi:</label>
+            <select id="operation">
+                <option value="AND">AND</option>
+                <option value="OR">OR</option>
+                <option value="NOT">NOT</option>
+                <option value="IMPLIKASI">IMPLIKASI</option>
+                <option value="XOR">XOR</option>
+                <option value="BIIMPLIKASI">BIIMPLIKASI</option>
+            </select>
+        </div>
+        <div>
+            <label for="negateResult">Negasikan Hasil Akhir?</label>
+            <input type="checkbox" id="negateResult">
+        </div>
+        <button onclick="hitung()">Hitung</button>
+        <h2>Hasil : <span id="result">-</span></h2>
+    </div>
+
+    <script>
+        function hitung() {
+            const operand1 = document.getElementById("operand1").value === "true";
+            const operand2 = document.getElementById("operand2").value === "true";
+            const operasi = document.getElementById("operation").value;
+            const negateResult = document.getElementById("negateResult").checked;
+            let hasil;
+
+            switch (operasi) {
+                case "AND":
+                    hasil = operand1 && operand2;
+                    break;
+                case "OR":
+                    hasil = operand1 || operand2;
+                    break;
+                case "NOT":
+                    hasil = !operand1;
+                    break;
+                case "IMPLIKASI":
+                    hasil = !operand1 || operand2;
+                    break;
+                case "XOR":
+                    hasil = operand1 !== operand2;
+                    break;
+                case "BIIMPLIKASI":
+                    hasil = operand1 === operand2;
+                    break;
+                default:
+                    hasil = "Operasi tidak dikenali";
+            }
+
+            if (negateResult) {
+                hasil = !hasil;
+            }
+
+            // Tampilkan hasil
+            document.getElementById("result").innerText = hasil;
+        }
+    </script>
+</body>
+</html>
